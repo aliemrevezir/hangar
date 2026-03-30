@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Dealer {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  phone       String
+  whatsapp    String
+  description String?  @db.Text
+  city        String
+  district    String
+  address     String?  @db.Text
+  brands      String[]
+  models      String[]
+  partTypes   String[]
+  specialties String[]
+  rating      Float    @default(0)
+  isActive    Boolean  @default(true)
+  isFeatured  Boolean  @default(false)
+  plan        String   @default("classic") // classic, gold, premium
+  logoUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([city])
+  @@index([isActive])
+  @@index([plan])
+  @@index([city, district])
+}
+
+model PartRequest {
+  id          String   @id @default(cuid())
+  customerName    String
+  customerPhone   String
+  brand       String
+  model       String?
+  year        Int?
+  partType    String
+  partDetail  String   @db.Text
+  city        String?
+  status      String   @default("new") // new, matched, closed
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status])
+  @@index([brand])
+  @@index([createdAt])
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String   @db.Text
+  content     String   @db.Text
+  author      String
+  category    String   // tavsiye, rehber, sponsorlu, haber
+  tags        String[]
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([isPublished])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+}
