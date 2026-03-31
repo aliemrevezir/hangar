@@ -1,9 +1,8 @@
 import { Suspense } from 'react';
-import { prisma } from '@/lib/db';
-import { Prisma } from '@prisma/client';
 import Container from '@/components/ui/Container';
 import BlogCard from '@/components/blog/BlogCard';
 import BlogFilters from '@/components/blog/BlogFilters';
+import { getPublishedBlogPosts } from '@/lib/mock-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,15 +16,7 @@ export default async function BlogPage({
   searchParams: Promise<{ kategori?: string; yazar?: string }>;
 }) {
   const { kategori, yazar } = await searchParams;
-
-  const where: Prisma.BlogPostWhereInput = { isPublished: true };
-  if (kategori) where.category = kategori;
-  if (yazar) where.author = yazar;
-
-  const posts = await prisma.blogPost.findMany({
-    where,
-    orderBy: { createdAt: 'desc' },
-  });
+  const posts = getPublishedBlogPosts({ kategori, yazar });
 
   return (
     <section className="py-8 lg:py-12 bg-gray-50 min-h-screen">

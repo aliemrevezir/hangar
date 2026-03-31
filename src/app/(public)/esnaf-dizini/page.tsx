@@ -1,9 +1,8 @@
 import { Suspense } from 'react';
-import { prisma } from '@/lib/db';
-import { Prisma } from '@prisma/client';
 import Container from '@/components/ui/Container';
 import DealerCard from '@/components/directory/DealerCard';
 import DealerFilters from '@/components/directory/DealerFilters';
+import { getFilteredDealers } from '@/lib/mock-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -19,30 +18,14 @@ async function DealerList({
   const { city, brand, partType, search, page: pageStr } = searchParams;
   const page = parseInt(pageStr || '1');
   const limit = 12;
-
-  const where: Prisma.DealerWhereInput = { isActive: true };
-  if (city) where.city = city;
-  if (brand) where.brands = { has: brand };
-  if (partType) where.partTypes = { has: partType };
-  if (search) {
-    where.OR = [
-      { name: { contains: search, mode: 'insensitive' } },
-      { city: { contains: search, mode: 'insensitive' } },
-      { district: { contains: search, mode: 'insensitive' } },
-    ];
-  }
-
-  const [dealers, total] = await Promise.all([
-    prisma.dealer.findMany({
-      where,
-      skip: (page - 1) * limit,
-      take: limit,
-      orderBy: [{ plan: 'desc' }, { isFeatured: 'desc' }, { rating: 'desc' }],
-    }),
-    prisma.dealer.count({ where }),
-  ]);
-
-  const totalPages = Math.ceil(total / limit);
+  const { dealers, total, totalPages } = getFilteredDealers({
+    city,
+    brand,
+    partType,
+    search,
+    page,
+    limit,
+  });
 
   if (dealers.length === 0) {
     return (

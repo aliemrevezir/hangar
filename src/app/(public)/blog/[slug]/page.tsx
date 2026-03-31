@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
-import { prisma } from '@/lib/db';
 import Container from '@/components/ui/Container';
 import BlogCard from '@/components/blog/BlogCard';
 import { Tag } from 'antd';
+import { getBlogPostBySlug, getRelatedBlogPosts } from '@/lib/mock-data';
 import type { Metadata } from 'next';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -24,7 +24,7 @@ const authorColors: Record<string, string> = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await prisma.blogPost.findUnique({ where: { slug } });
+  const post = getBlogPostBySlug(slug);
   if (!post) return { title: 'Bulunamadı | Hangar' };
   return {
     title: `${post.title} | Hangar Blog`,
@@ -34,22 +34,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogDetailPage({ params }: Props) {
   const { slug } = await params;
-  const post = await prisma.blogPost.findUnique({ where: { slug } });
+  const post = getBlogPostBySlug(slug);
   if (!post) notFound();
 
   const cat = categoryLabels[post.category] || categoryLabels.haber;
   const authorColor = authorColors[post.author] || '#6B3FA0';
 
   // İlgili yazılar: aynı kategori veya aynı yazar
-  const relatedPosts = await prisma.blogPost.findMany({
-    where: {
-      isPublished: true,
-      id: { not: post.id },
-      OR: [{ category: post.category }, { author: post.author }],
-    },
-    take: 3,
-    orderBy: { createdAt: 'desc' },
-  });
+  const relatedPosts = getRelatedBlogPosts(post, 3);
 
   return (
     <section className="py-8 lg:py-12 bg-gray-50 min-h-screen">

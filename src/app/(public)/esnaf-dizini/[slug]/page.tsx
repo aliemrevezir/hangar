@@ -1,15 +1,15 @@
 import { notFound } from 'next/navigation';
-import { prisma } from '@/lib/db';
 import Container from '@/components/ui/Container';
 import WhatsAppButton from '@/components/directory/WhatsAppButton';
 import { formatPhone } from '@/lib/utils';
+import { getDealerBySlug } from '@/lib/mock-data';
 import type { Metadata } from 'next';
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const dealer = await prisma.dealer.findUnique({ where: { slug } });
+  const dealer = getDealerBySlug(slug);
   if (!dealer) return { title: 'Bulunamadı | Hangar' };
   return {
     title: `${dealer.name} | Hangar`,
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DealerDetailPage({ params }: Props) {
   const { slug } = await params;
-  const dealer = await prisma.dealer.findUnique({ where: { slug } });
+  const dealer = getDealerBySlug(slug);
   if (!dealer) notFound();
 
   return (
