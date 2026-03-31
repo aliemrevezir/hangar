@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import Container from '@/components/ui/Container';
 import BlogCard from '@/components/blog/BlogCard';
 import { Tag } from 'antd';
@@ -152,9 +153,9 @@ export default async function BlogDetailPage({ params }: Props) {
           )}
 
           <div className="mt-8 text-center">
-            <a href="/blog" className="text-primary hover:underline text-sm">
+            <Link href="/blog" className="text-primary hover:underline text-sm">
               ← Tüm Yazılara Dön
-            </a>
+            </Link>
           </div>
         </article>
       </Container>

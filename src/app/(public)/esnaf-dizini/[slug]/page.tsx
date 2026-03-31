@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import Container from '@/components/ui/Container';
 import WhatsAppButton from '@/components/directory/WhatsAppButton';
 import { formatPhone } from '@/lib/utils';
@@ -134,9 +135,9 @@ export default async function DealerDetailPage({ params }: Props) {
           </div>
 
           <div className="mt-6 text-center">
-            <a href="/esnaf-dizini" className="text-primary hover:underline text-sm">
+            <Link href="/esnaf-dizini" className="text-primary hover:underline text-sm">
               ← Tüm Esnaflara Dön
-            </a>
+            </Link>
           </div>
         </div>
       </Container>
