@@ -324,6 +324,17 @@ export function getDealerBySlug(slug: string): Dealer | undefined {
   return mockDealers.find((dealer) => dealer.slug === slug && dealer.isActive);
 }
 
+export function getRelatedDealers(currentSlug: string, limit = 3): Dealer[] {
+  const current = mockDealers.find((d) => d.slug === currentSlug);
+  if (!current) return [];
+
+  return mockDealers
+    .filter((d) => d.isActive && d.slug !== currentSlug)
+    .filter((d) => d.city === current.city || d.brands.some((b) => current.brands.includes(b)))
+    .sort((a, b) => rankPlan(b.plan) - rankPlan(a.plan) || b.rating - a.rating)
+    .slice(0, limit);
+}
+
 export function getFilteredDealers(filters: DealerFilters = {}) {
   const {
     city,
