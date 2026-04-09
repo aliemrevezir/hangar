@@ -7,12 +7,10 @@ import Link from 'next/link';
 import Container from '@/components/ui/Container';
 
 const navLinks = [
-  { label: 'Ana Sayfa', href: '/' },
   { label: 'Esnaf Dizini', href: '/esnaf-dizini' },
   { label: 'Parça Talebi', href: '/parca-talebi' },
   { label: 'Üyelik Paketleri', href: '/uyelik-paketleri' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Yönetim Paneli', href: '/admin' },
 ];
 
 export default function Navbar() {
@@ -45,7 +43,7 @@ export default function Navbar() {
             <Button type="default" href="/admin/login">
               Giriş Yap
             </Button>
-            <Button type="primary" href="#" style={{ backgroundColor: '#6B3FA0' }}>
+            <Button type="primary" href="/uyelik-paketleri" style={{ backgroundColor: '#6B3FA0' }}>
               Esnaf Başvurusu
             </Button>
           </div>
@@ -77,7 +75,7 @@ export default function Navbar() {
                 <Button type="default" href="/admin/login" block>
                   Giriş Yap
                 </Button>
-                <Button type="primary" href="#" block style={{ backgroundColor: '#6B3FA0' }}>
+                <Button type="primary" href="/uyelik-paketleri" block style={{ backgroundColor: '#6B3FA0' }}>
                   Esnaf Başvurusu
                 </Button>
               </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { Select, Button } from 'antd';
-import { SearchOutlined, ThunderboltOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Container from '@/components/ui/Container';
@@ -55,33 +55,19 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-br from-[#1a0a2e] via-primary-dark to-primary" />
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoLTZWMzRoNnptMC0zMHY2aC02VjRoNnptMCAxMnY2aC02VjE2aDZ6bTAgMTJ2Nmgtdi0yaC02di02aDZ6bTEyIDEydjZoLTZ2LTZoNnptMC0zMHY2aC02VjRoNnptMCAxMnY2aC02VjE2aDZ6bS0yNCAxMnY2aC02di02aDZ6bTAtMzB2NmgtNlY0aDZ6bTAgMTJ2NmgtNlYxNmg2eiIvPjwvZz48L2c+PC9zdmc+')] opacity-30" />
 
-      {/* Floating particles effect */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
-
       <Container>
         <div className="relative pt-16 pb-20 lg:pt-24 lg:pb-28">
-          {/* Badge */}
-          <div className="flex justify-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2">
-              <ThunderboltOutlined className="text-yellow-400" />
-              <span className="text-white/90 text-sm font-medium">
-                500+ esnaf, 120.000+ aylık arama
-              </span>
-            </div>
-          </div>
-
           {/* Headline */}
           <div className="text-center max-w-4xl mx-auto mb-10">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
-              Aradığın parçayı
+              Aradığın yedek parçayı
               <span className="block mt-2 bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-200 bg-clip-text text-transparent">
-                şak diye bul.
+                güvenilir esnaftan bul.
               </span>
             </h1>
             <p className="text-lg lg:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-              Marka ve modelini seç, sana uygun yedek parça esnaflarını anında listeleyelim.
-              WhatsApp ile direkt iletişime geç.
+              Marka ve modelini seç, Türkiye&apos;nin dört bir yanındaki yedek parça esnaflarını listele.
+              WhatsApp ile hemen iletişime geç.
             </p>
           </div>
 
@@ -177,7 +163,7 @@ export default function HeroSection() {
                 <span className="text-green-400">✓</span> Ücretsiz arama
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-green-400">✓</span> Anında esnaf listesi
+                <span className="text-green-400">✓</span> Doğrulanmış esnaflar
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-green-400">✓</span> WhatsApp ile direkt iletişim

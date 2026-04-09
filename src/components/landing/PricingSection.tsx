@@ -13,10 +13,9 @@ export default function PricingSection() {
     <section id="paketler" className="py-16 lg:py-24 bg-white">
       <Container>
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-foreground mb-4">Üyelik Paketleri</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-4">Esnaf Üyelik Paketleri</h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            İhtiyacınıza uygun paketi seçin. Classic ile dizinde yer alın, Gold ile parça
-            taleplerini alın, Premium ile her yerde öne çıkın.
+            İşletmenize uygun paketi seçin. İstediğiniz zaman yükseltme yapabilirsiniz.
           </p>
         </div>
 
@@ -45,11 +44,12 @@ export default function PricingSection() {
 
                 <div className="text-center">
                   <h3
-                    className="text-xl font-bold mb-1"
+                    className="text-xl font-bold mb-0.5"
                     style={{ color: plan.color }}
                   >
                     {plan.name}
                   </h3>
+                  <p className="text-xs text-gray-400 mb-1">{plan.subtitle}</p>
 
                   <div className="my-5">
                     <span className="text-4xl font-extrabold text-foreground">

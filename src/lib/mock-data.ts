@@ -242,6 +242,56 @@ export const mockDealers: Dealer[] = [
   },
 ];
 
+export const mockOffers = [
+  {
+    seller: 'Yılmaz BMW Çıkma',
+    city: 'İstanbul',
+    plan: 'premium' as const,
+    condition: 'Orijinal',
+    price: '12.500 TL',
+    delivery: '2 iş günü',
+    shipping: 'Kargo dahil',
+    tags: ['Tavsiye Edilen', 'Fotoğraflı', 'Doğrulanmış Esnaf'],
+  },
+  {
+    seller: 'Kardeşler Mercedes Parça',
+    city: 'İstanbul',
+    plan: 'premium' as const,
+    condition: 'Çıkma',
+    price: '8.900 TL',
+    delivery: '1 iş günü',
+    shipping: 'Kargo dahil',
+    tags: ['En Uygun Fiyat', 'Hızlı Teslimat'],
+  },
+  {
+    seller: 'VAG Grup Depo',
+    city: 'İstanbul',
+    plan: 'gold' as const,
+    condition: 'Muadil',
+    price: '6.200 TL',
+    delivery: '3 iş günü',
+    shipping: 'Alıcı öder',
+    tags: ['OEM'],
+  },
+];
+
+function rankPlanForSort(plan: string): number {
+  if (plan === 'premium') return 3;
+  if (plan === 'gold') return 2;
+  return 1;
+}
+
+export function getFeaturedDealers(limit = 4): Dealer[] {
+  return [...mockDealers]
+    .filter((d) => d.isActive)
+    .sort((a, b) => {
+      const planDiff = rankPlanForSort(b.plan) - rankPlanForSort(a.plan);
+      if (planDiff !== 0) return planDiff;
+      return b.rating - a.rating;
+    })
+    .slice(0, limit);
+}
+
 export function getPublishedBlogPosts(filters: BlogFilters = {}): BlogPost[] {
   const { kategori, yazar } = filters;
 

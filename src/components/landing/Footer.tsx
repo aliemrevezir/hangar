@@ -3,11 +3,10 @@ import Container from '@/components/ui/Container';
 
 const footerLinks = [
   { label: 'Esnaf Dizini', href: '/esnaf-dizini' },
-  { label: 'Parça Talebi', href: '#' },
-  { label: 'SEO İçerik Platformu', href: '#' },
-  { label: 'Paketler', href: '#paketler' },
-  { label: 'Blog', href: '#' },
-  { label: 'İletişim', href: '#' },
+  { label: 'Parça Talebi', href: '/parca-talebi' },
+  { label: 'Üyelik Paketleri', href: '/uyelik-paketleri' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'İletişim', href: '/iletisim' },
 ];
 
 export default function Footer() {
@@ -31,7 +30,9 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-3 text-sm text-gray-500">
-            <Link href="#" className="hover:text-primary">Esnaf Başvurusu</Link>
+            <Link href="#" className="hover:text-primary">Gizlilik Politikası</Link>
+            <span className="text-gray-300">·</span>
+            <Link href="#" className="hover:text-primary">Kullanım Koşulları</Link>
           </div>
         </div>
       </Container>
